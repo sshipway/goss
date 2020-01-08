@@ -755,8 +755,9 @@ Validates the state of a service.
 service:
   sshd:
     # required attributes
-    enabled: true
     running: true
+    # optional attributes
+    enabled: true
     skip: false
 ```
 

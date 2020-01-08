@@ -18,3 +18,5 @@ service:
     enabled: true
     running: true
     skip: true
+  noenabledcheck:
+    running: false
