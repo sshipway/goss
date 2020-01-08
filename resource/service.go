@@ -9,7 +9,7 @@ type Service struct {
 	Title   string  `json:"title,omitempty" yaml:"title,omitempty"`
 	Meta    meta    `json:"meta,omitempty" yaml:"meta,omitempty"`
 	Service string  `json:"-" yaml:"-"`
-	Enabled matcher `json:"enabled" yaml:"enabled"`
+	Enabled matcher `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 	Running matcher `json:"running" yaml:"running"`
 	Skip    bool    `json:"skip,omitempty" yaml:"skip,omitempty"`
 }
@@ -29,7 +29,9 @@ func (s *Service) Validate(sys *system.System) []TestResult {
 	}
 
 	var results []TestResult
-	results = append(results, ValidateValue(s, "enabled", s.Enabled, sysservice.Enabled, skip))
+	if s.Enabled != nil {
+		results = append(results, ValidateValue(s, "enabled", s.Enabled, sysservice.Enabled, skip))
+	}
 	results = append(results, ValidateValue(s, "running", s.Running, sysservice.Running, skip))
 	return results
 }
